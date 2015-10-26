@@ -159,7 +159,7 @@ def convleave(bot, event, *args):
     for convid, convdata in convlist.items():
         if convdata["type"] == "GROUP":
             if not "quietly" in posix_args:
-                yield from bot.coro_send_message(convid, _('I\'ll be back!'))
+                yield from bot.coro_send_message(convid, _('Devil will be back!'))
 
             try:
                 yield from bot._client.removeuser(convid)
