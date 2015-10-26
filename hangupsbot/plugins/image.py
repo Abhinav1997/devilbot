@@ -28,22 +28,28 @@ def image(bot, event, *args):
   num = 0
   for h in hits:
     title = h['title']
-#    url = h['url']
     if h['url'].endswith((".jpg", ".gif", "gifv", "png")):
       while num == 0:
         url = h['url']
         num = 1
   url = urllib.request.unquote(url)
-  title = html.unescape(title)
 
-  if url.endswith((".jpg", ".gif", "gifv", "png")):
-    filename = os.path.basename(url)
-    r = yield from aiohttp.request('get', url)
-    raw = yield from r.read()
-    image_data = io.BytesIO(raw)
-    image_id = yield from bot._client.upload_image(image_data, filename=filename)
-    yield from bot.coro_send_message(event.conv.id_, None, image_id=image_id)
-  else:
+  try:
+    title
+  except UnboundLocalError:
     yield from bot.coro_send_message(
         event.conv,
-        _("Can't find an image file"))
+        _("No results found."))
+  else:
+    title = html.unescape(title)
+    if url.endswith((".jpg", ".gif", "gifv", "png")):
+      filename = os.path.basename(url)
+      r = yield from aiohttp.request('get', url)
+      raw = yield from r.read()
+      image_data = io.BytesIO(raw)
+      image_id = yield from bot._client.upload_image(image_data, filename=filename)
+      yield from bot.coro_send_message(event.conv.id_, None, image_id=image_id)
+    else:
+      yield from bot.coro_send_message(
+          event.conv,
+          _("Can't find an image file"))
