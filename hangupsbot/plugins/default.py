@@ -16,8 +16,8 @@ _internal = {} # non-persistent internal state independent of config.json/memory
 _internal["broadcast"] = { "message": "", "conversations": [] } # /devilbot broadcast
 
 def _initialise(bot):
-    plugins.register_admin_command(["broadcast", "users", "user", "hangouts", "rename", "leave", "reload", "quit", "config", "whereami"])
-    plugins.register_user_command(["echo", "whoami"])
+    plugins.register_admin_command(["broadcast", "users", "user", "hangouts", "rename", "leave", "reload", "quit", "config"])
+    plugins.register_user_command(["echo", "whoami", "whereami"])
 
 
 def echo(bot, event, *args):

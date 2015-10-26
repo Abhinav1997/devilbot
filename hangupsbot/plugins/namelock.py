@@ -28,7 +28,7 @@ def _watch_rename(bot, event, command):
     if topic:
         # seems to be a valid topic set for the current conversation
 
-        authorised_topic_change = False
+        authorised_topic_change = True
 
         if not authorised_topic_change and event.user.is_self:
             # bot is authorised to change the name
