@@ -5,7 +5,7 @@ import plugins
 
 
 def _initialise(bot):
-    plugins.register_admin_command(["easteregg"])
+    plugins.register_user_command(["easteregg"])
 
 
 def easteregg(bot, event, easteregg, eggcount=1, period=0.5, *args):
