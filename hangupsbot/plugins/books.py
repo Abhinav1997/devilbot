@@ -32,11 +32,18 @@ def book(bot, event, *args):
       url = h['url']
       num = 1
   url = urllib.request.unquote(url)
-  title = html.unescape(title)
 
-  yield from bot.coro_send_message(
-      event.conv,
-      _(title))
-  yield from bot.coro_send_message(
-      event.conv,
-      _(url))
+  try:
+    title
+  except UnboundLocalError:
+    yield from bot.coro_send_message(
+        event.conv,
+        _("No results found."))
+  else:
+    title = html.unescape(title)
+    yield from bot.coro_send_message(
+        event.conv,
+        _(title))
+    yield from bot.coro_send_message(
+        event.conv,
+        _(url))
