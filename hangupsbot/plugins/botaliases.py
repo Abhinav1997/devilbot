@@ -15,7 +15,7 @@ def _initialise(bot):
     else:
         myself = bot.user_self()
         # basic
-        bot_command_aliases = ["/bot"]
+        bot_command_aliases = ["/devilbot"]
         # /<first name fragment>
         first_fragment = myself["full_name"].split()[0].lower()
         if first_fragment and first_fragment != "unknown":
@@ -31,7 +31,7 @@ def _initialise(bot):
         bot_command_aliases = []
 
     if len(bot_command_aliases) == 0:
-        bot.append("/bot")
+        bot.append("/devilbot")
 
     bot._handlers.bot_command = bot_command_aliases
     logger.info("aliases: {}".format(bot_command_aliases))
@@ -65,7 +65,7 @@ def botalias(bot, event, *args):
 
             if _aliases != bot._handlers.bot_command:
                 if len(_aliases) == 0:
-                    _aliases = ["/bot"]
+                    _aliases = ["/devilbot"]
 
                 bot.memory.set_by_path(["bot.command_aliases"], _aliases)
                 bot.memory.save()

@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 _internal = {} # non-persistent internal state independent of config.json/memory.json
 
-_internal["broadcast"] = { "message": "", "conversations": [] } # /bot broadcast
+_internal["broadcast"] = { "message": "", "conversations": [] } # /devilbot broadcast
 
 def _initialise(bot):
     plugins.register_admin_command(["broadcast", "users", "user", "hangouts", "rename", "leave", "reload", "quit", "config", "whereami"])
@@ -25,7 +25,7 @@ def echo(bot, event, *args):
     raw_arguments = event.text.split(maxsplit=3)
     if len(raw_arguments) >= 3:
         if raw_arguments[2] in bot.conversations.catalog:
-            # e.g. /bot echo <convid> <text>
+            # e.g. /devilbot echo <convid> <text>
             # only admins can echo messages into other conversations
             admins_list = bot.get_config_suboption(event.conv_id, 'admins')
             if event.user_id.chat_id in admins_list:
@@ -34,7 +34,7 @@ def echo(bot, event, *args):
                 convid = event.conv_id
                 raw_arguments = [ _("<b>only admins can echo other conversations</b>") ]
         else:
-            # assumed /bot echo <text>
+            # assumed /devilbot echo <text>
             convid = event.conv_id
             raw_arguments = event.text.split(maxsplit=2)
 
@@ -135,10 +135,10 @@ def broadcast(bot, event, *args):
             yield from bot.coro_send_message(event.conv, _("broadcast: message sent to {} chats".format(len(_internal["broadcast"]["conversations"]))))
 
         else:
-            yield from bot.coro_send_message(event.conv, _("broadcast: /bot broadcast [info|message|add|remove|NOW] ..."))
+            yield from bot.coro_send_message(event.conv, _("broadcast: /devilbot broadcast [info|message|add|remove|NOW] ..."))
 
     else:
-        yield from bot.coro_send_message(event.conv, _("broadcast: /bot broadcast [info|message|add|remove|NOW]"))
+        yield from bot.coro_send_message(event.conv, _("broadcast: /devilbot broadcast [info|message|add|remove|NOW]"))
 
 
 def users(bot, event, *args):
@@ -248,10 +248,10 @@ def quit(bot, event, *args):
 
 def config(bot, event, cmd=None, *args):
     """displays or modifies the configuration
-        Parameters: /bot config get [key] [subkey] [...]
-                    /bot config set [key] [subkey] [...] [value]
-                    /bot config append [key] [subkey] [...] [value]
-                    /bot config remove [key] [subkey] [...] [value]"""
+        Parameters: /devilbot config get [key] [subkey] [...]
+                    /devilbot config set [key] [subkey] [...] [value]
+                    /devilbot config append [key] [subkey] [...] [value]
+                    /devilbot config remove [key] [subkey] [...] [value]"""
 
     # consume arguments and differentiate beginning of a json array or object
     tokens = list(args)

@@ -113,20 +113,20 @@ The wiki has a more comprehensive **[list of plugins]
 # Interacting with the Bot
 
 There are two general types of interactions with the bot:
-* **`/bot` commands** begin with `/bot` e.g. `/bot dosomething`
+* **`/devilbot` commands** begin with `/devilbot` e.g. `/devilbot dosomething`
   * some bot commands are admin-only
 * custom interactions (usage and accessibility varies by plugin)
 
 The base bot supports some basic command even without any plugins loaded.
   Here is a partial list:
 
-`/bot help`
+`/devilbot help`
 * Bot lists all supported commands in a private message with the user
 
-`/bot ping`
+`/devilbot ping`
 * Bot replies with a `pong`.
 
-`/bot version`
+`/devilbot version`
 * Bot replies with the version number of the framework
 
 A full list of commands supported by the base framework is available at the 
