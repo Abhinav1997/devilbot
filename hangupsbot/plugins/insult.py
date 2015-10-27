@@ -16,7 +16,8 @@ def insult(bot, event, *args):
   texts = soup.findAll(text=True)
   insult = soup.findAll(attrs={'bordercolor' : '#FFFFFF'})[0].getText()
   insult = os.linesep.join([s for s in insult.splitlines() if s])
-  insult = name + ', ' + insult
+  if name:
+    insult = name + ', ' + insult
   yield from bot.coro_send_message(
       event.conv,
       _(insult))
