@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 def _initialise(bot):
     plugins.register_handler(_watch_rename, type="rename")
-    plugins.register_admin_command(["topic"])
+    plugins.register_user_command(["topic"])
 
 
 @asyncio.coroutine
