@@ -47,7 +47,13 @@ def image(bot, event, *args):
       r = yield from aiohttp.request('get', url)
       raw = yield from r.read()
       image_data = io.BytesIO(raw)
-      image_id = yield from bot._client.upload_image(image_data, filename=filename)
+      try:
+        image_id = yield from bot._client.upload_image(image_data, filename=filename)
+      except KeyError:
+        yield from bot.coro_send_message(
+            event.conv,
+            _("Can't find an image file"))
+        return
       yield from bot.coro_send_message(event.conv.id_, None, image_id=image_id)
     else:
       yield from bot.coro_send_message(
