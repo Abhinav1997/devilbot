@@ -12,7 +12,7 @@ def insult(bot, event, *args):
   name = ' '.join(args).strip().title()
   insult = []
   htm = urllib.request.urlopen("http://randominsults.net").read()
-  soup = BeautifulSoup(htm)
+  soup = BeautifulSoup(htm, "html5lib")
   texts = soup.findAll(text=True)
   insult = soup.findAll(attrs={'bordercolor' : '#FFFFFF'})[0].getText()
   insult = os.linesep.join([s for s in insult.splitlines() if s])
