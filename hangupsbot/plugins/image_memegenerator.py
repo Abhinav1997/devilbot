@@ -14,7 +14,7 @@ _externals = { "running": False }
 
 
 def _initialise(bot):
-    plugins.register_admin_command(["meme"])
+    plugins.register_user_command(["meme"])
 
 
 @asyncio.coroutine

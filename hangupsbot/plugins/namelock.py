@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 def _initialise(bot):
     plugins.register_handler(_watch_rename, type="rename")
-    plugins.register_user_command(["topic"])
+    plugins.register_admin_command(["topic"])
 
 
 @asyncio.coroutine
@@ -28,7 +28,7 @@ def _watch_rename(bot, event, command):
     if topic:
         # seems to be a valid topic set for the current conversation
 
-        authorised_topic_change = True
+        authorised_topic_change = False
 
         if not authorised_topic_change and event.user.is_self:
             # bot is authorised to change the name
