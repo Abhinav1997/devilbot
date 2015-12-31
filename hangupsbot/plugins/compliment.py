@@ -10,11 +10,9 @@ def _initialise(bot):
     
 def compliment(bot, event, *args):
   name = ' '.join(args).strip().title()
-  compli = []
-  htm = urllib.request.urlopen("http://toykeeper.net/programs/mad/compliments").read()
+  htm = urllib.request.urlopen("http://www.madsci.org/cgi-bin/cgiwrap/~lynn/jardin/SCG").read()
   soup = BeautifulSoup(htm, "html5lib")
-  texts = soup.findAll(text=True)
-  compli = soup.findAll(attrs={'class' : 'blurb_title_1'})[0].getText()
+  compli = soup.h2.string
   compli = os.linesep.join([s for s in compli.splitlines() if s])
   if name:
     compli = name + ', ' + compli
