@@ -18,13 +18,14 @@ import urllib.request, urllib.parse
 def _initialise(bot):
   plugins.register_user_command(["image"])
 
-def image(bot, event, *args, number=0):
+def image(bot, event, number="0", *args):
+  error = 0
+  squery = ' '.join(args).strip()
   try:
     int(number)
   except ValueError:
-    number = 0
-  error = 0
-  squery = ' '.join(args).strip()
+    squery = number + " " + squery
+    number = "0"
   squery = squery.replace(" ", "+")
   query = re.sub(r'^\.g', u'', squery, re.UNICODE).encode('utf-8')
   query = query.strip()
@@ -41,7 +42,7 @@ def image(bot, event, *args, number=0):
     search_results = search_response.read().decode("utf8")
     results = json.loads(search_results)
     try:
-      data = results['items'][number]['pagemap']['cse_image'][0]['src']
+      data = results['items'][int(number)]['pagemap']['cse_image'][0]['src']
     except KeyError:
       data = "placeholder"
     if data.endswith((".jpg", ".gif", "gifv", "webm", "png", "jpeg")):
