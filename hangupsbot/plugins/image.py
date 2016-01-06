@@ -4,8 +4,8 @@ instructions:
 * put CSE Search ID in config.json:cse
 * more info on https://developers.google.com/custom-search/
 *
-* get image API key from https://console.developers.google.com/apis/
-* put image API key in config.json:image-api
+* get google API key from https://console.developers.google.com/apis/
+* put google API key in config.json:google-api
 """
 
 import hangups
@@ -16,7 +16,9 @@ import html, aiohttp
 import urllib.request, urllib.parse
 
 def _initialise(bot):
-  plugins.register_user_command(["image"])
+  gapi = bot.get_config_option("google-api")
+  if gapi and gapi != "GOOGLE_API_KEY":
+    plugins.register_user_command(["image"])
 
 def image(bot, event, number="0", *args):
   error = 0
@@ -32,7 +34,7 @@ def image(bot, event, number="0", *args):
   query = urllib.request.quote(query)
   cse = bot.get_config_option("cse")
   cse = cse.replace(":","%3A")
-  api = bot.get_config_option("image-api")
+  api = bot.get_config_option("google-api")
   url = u'https://www.googleapis.com/customsearch/v1?q=' + query + u'&cx=' + cse + u'&key=' + api
   try:
     search_response = urllib.request.urlopen(url)
