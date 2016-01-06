@@ -20,14 +20,9 @@ def _initialise(bot):
   if gapi and gapi != "GOOGLE_API_KEY":
     plugins.register_user_command(["image"])
 
-def image(bot, event, number="0", *args):
+def image(bot, event, *args):
   error = 0
   squery = ' '.join(args).strip()
-  try:
-    int(number)
-  except ValueError:
-    squery = number + " " + squery
-    number = "0"
   squery = squery.replace(" ", "+")
   query = re.sub(r'^\.g', u'', squery, re.UNICODE).encode('utf-8')
   query = query.strip()
@@ -43,10 +38,13 @@ def image(bot, event, number="0", *args):
   if error is 0:
     search_results = search_response.read().decode("utf8")
     results = json.loads(search_results)
-    try:
-      data = results['items'][int(number)]['pagemap']['cse_image'][0]['src']
-    except KeyError:
-      data = "placeholder"
+    for i in range (0,9):
+      try:
+        data = results['items'][i]['pagemap']['cse_image'][0]['src']
+        if data.endswith((".jpg", ".gif", "gifv", "webm", "png", "jpeg")):
+          break
+      except KeyError:
+        data = "placeholder"
     if data.endswith((".jpg", ".gif", "gifv", "webm", "png", "jpeg")):
       filename = os.path.basename(data)
       r = yield from aiohttp.request('get', data)
