@@ -45,6 +45,9 @@ def image(bot, event, *args):
           break
       except KeyError:
         data = "placeholder"
+      except IndexError:
+        data = "placeholder"
+        break
     if data.endswith((".jpg", ".gif", "gifv", "webm", "png", "jpeg")):
       filename = os.path.basename(data)
       r = yield from aiohttp.request('get', data)
@@ -55,7 +58,7 @@ def image(bot, event, *args):
     else:
       yield from bot.coro_send_message(
           event.conv,
-          _("There was some problem with image."))
+          _("No suitable images found."))
   else:
     yield from bot.coro_send_message(
         event.conv,
