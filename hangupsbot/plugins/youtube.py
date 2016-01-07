@@ -41,6 +41,8 @@ def youtube(bot, event, *args):
       data = results['items'][i]['id']['videoId']
     except KeyError:
       error = 1
+    except IndexError:
+      error = 1
     if error != 1:
       break
   if error != 1:

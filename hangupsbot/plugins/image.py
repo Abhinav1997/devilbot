@@ -4,8 +4,8 @@ instructions:
 * put CSE Search ID in config.json:cse
 * more info on https://developers.google.com/custom-search/
 *
-* get image API key from https://console.developers.google.com/apis/
-* put image API key in config.json:image-api
+* get google API key from https://console.developers.google.com/apis/
+* put google API key in config.json:google-api
 """
 
 import hangups
@@ -16,23 +16,20 @@ import html, aiohttp
 import urllib.request, urllib.parse
 
 def _initialise(bot):
-  plugins.register_user_command(["image"])
+  gapi = bot.get_config_option("google-api")
+  if gapi and gapi != "GOOGLE_API_KEY":
+    plugins.register_user_command(["image"])
 
-def image(bot, event, number="0", *args):
+def image(bot, event, *args):
   error = 0
   squery = ' '.join(args).strip()
-  try:
-    int(number)
-  except ValueError:
-    squery = number + " " + squery
-    number = "0"
   squery = squery.replace(" ", "+")
   query = re.sub(r'^\.g', u'', squery, re.UNICODE).encode('utf-8')
   query = query.strip()
   query = urllib.request.quote(query)
   cse = bot.get_config_option("cse")
   cse = cse.replace(":","%3A")
-  api = bot.get_config_option("image-api")
+  api = bot.get_config_option("google-api")
   url = u'https://www.googleapis.com/customsearch/v1?q=' + query + u'&cx=' + cse + u'&key=' + api
   try:
     search_response = urllib.request.urlopen(url)
@@ -41,10 +38,16 @@ def image(bot, event, number="0", *args):
   if error is 0:
     search_results = search_response.read().decode("utf8")
     results = json.loads(search_results)
-    try:
-      data = results['items'][int(number)]['pagemap']['cse_image'][0]['src']
-    except KeyError:
-      data = "placeholder"
+    for i in range (0,9):
+      try:
+        data = results['items'][i]['pagemap']['cse_image'][0]['src']
+        if data.endswith((".jpg", ".gif", "gifv", "webm", "png", "jpeg")):
+          break
+      except KeyError:
+        data = "placeholder"
+      except IndexError:
+        data = "placeholder"
+        break
     if data.endswith((".jpg", ".gif", "gifv", "webm", "png", "jpeg")):
       filename = os.path.basename(data)
       r = yield from aiohttp.request('get', data)
@@ -55,7 +58,7 @@ def image(bot, event, number="0", *args):
     else:
       yield from bot.coro_send_message(
           event.conv,
-          _("There was some problem with image."))
+          _("No suitable images found."))
   else:
     yield from bot.coro_send_message(
         event.conv,
