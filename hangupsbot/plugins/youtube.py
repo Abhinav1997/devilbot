@@ -37,6 +37,7 @@ def youtube(bot, event, *args):
   for i in range (0,4):
     error = 0
     try:
+      title = results['items'][i]['snippet']['title'] 
       data = results['items'][i]['id']['videoId']
     except KeyError:
       error = 1
