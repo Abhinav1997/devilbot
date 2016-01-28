@@ -24,6 +24,11 @@ def image(bot, event, *args):
   error = 0
   squery = ' '.join(args).strip()
   squery = squery.replace(" ", "+")
+  if not squery:
+    yield from bot.coro_send_message(
+        event.conv,
+        _("Please provide the detail of image you are looking for."))
+    return
   query = re.sub(r'^\.g', u'', squery, re.UNICODE).encode('utf-8')
   query = query.strip()
   query = urllib.request.quote(query)
