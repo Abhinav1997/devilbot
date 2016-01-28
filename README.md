@@ -19,12 +19,12 @@ Please see:
   If somebody mentions you in a room, receive a private hangout from the bot with details onthe mention,
   including context, room and person who mentioned you.
 * **Syncouts** :
-  A syncout is two Hangout group chats that have their messages forwarded to each devilbother, allowing seamless
+  A syncout is two Hangout group chats that have their messages forwarded to each other, allowing seamless
   interaction between the two rooms. Primarily used to beat the 150-member chat limit, but it can also be
   used for temporarily connecting teams together to interact.
 * **Cross-chat Syncouts** :
   Half of your team is on Slack? No problem! You can connect them into the same room to communicate.
-  Support for devilbother chat clients coming soon.
+  Support for other chat clients coming soon.
 * [**Hubot Integration**](https://github.com/hangoutsbot/hangoutsbot/wiki/Hubot-Integration):
   Hangupsbot allows you to connect to [Hubot](https://hubot.github.com/), instantly providing you access
   to hundreds of developed chat tools and plugins.

@@ -26,13 +26,13 @@ def echo(bot, event, *args):
     if len(raw_arguments) >= 3:
         if raw_arguments[2] in bot.conversations.catalog:
             # e.g. /bot echo <convid> <text>
-            # only admins can echo messages into devilbother conversations
+            # only admins can echo messages into other conversations
             admins_list = bot.get_config_suboption(event.conv_id, 'admins')
             if event.user_id.chat_id in admins_list:
                 convid = raw_arguments[2]
             else:
                 convid = event.conv_id
-                raw_arguments = [ _("<b>only admins can echo devilbother conversations</b>") ]
+                raw_arguments = [ _("<b>only admins can echo other conversations</b>") ]
         else:
             # assumed /bot echo <text>
             convid = event.conv_id
@@ -213,7 +213,7 @@ def rename(bot, event, *args):
 
 
 def leave(bot, event, conversation_id=None, *args):
-    """exits current or devilbother specified hangout"""
+    """exits current or other specified hangout"""
 
     arglist = list(args)
 

@@ -28,7 +28,7 @@ Note: `pip` may install an outdated version of hangups. You may have to
 # First-Run
 
 You need to **run the bot for the first time**. You will need at least 
-  two gmail accounts: one is your actual account, the devilbother will be your 
+  two gmail accounts: one is your actual account, the other will be your 
   bot account.
 
 The basic syntax for running the bot (assuming you are in the root 

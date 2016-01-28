@@ -140,7 +140,7 @@ def removebotadd(bot, event, user_id, *args):
     """remove supplied user id as a botkeeper.
     botkeepers are allowed to add bots into a conversation and their continued presence in a
     conversation keeps the bot from leaving. warning: removing a botkeeper may cause the bot to
-    leave conversations where the current botkeeper is present, if no devilbother botkeepers are present.
+    leave conversations where the current botkeeper is present, if no other botkeepers are present.
     """
 
     if not bot.memory.exists(["allowbotadd"]):

@@ -56,7 +56,7 @@ def _migrate_syncroom_v1(bot):
 
 def _handle_syncrooms_broadcast(bot, broadcast_list, context):
     """
-    handles non-syncroom messages, i.e. messages from devilbother plugins
+    handles non-syncroom messages, i.e. messages from other plugins
 
     for messages explicitly relayed by _handle_syncrooms_broadcast(), this
     handler actually doesn't run
@@ -75,9 +75,9 @@ def _handle_syncrooms_broadcast(bot, broadcast_list, context):
     if syncouts:
         for sync_room_list in syncouts:
             if origin_conversation_id in sync_room_list:
-                for devilbother_room_id in sync_room_list:
-                    if origin_conversation_id != devilbother_room_id:
-                        broadcast_list.append((devilbother_room_id, response))
+                for other_room_id in sync_room_list:
+                    if origin_conversation_id != other_room_id:
+                        broadcast_list.append((other_room_id, response))
 
                 logger.debug("broadcasting to {} room(s)".format(len(broadcast_list)))
 
@@ -253,7 +253,7 @@ def _handle_syncrooms_membership_change(bot, event, command):
 
 def syncusers(bot, event, conversation_id=None, *args):
     """syncroom-aware users list.
-    optional parameter conversation_id to get a list of users in devilbother rooms. will include users
+    optional parameter conversation_id to get a list of users in other rooms. will include users
     in linked syncrooms. append "rooms" to segment user list by individual rooms.
     """
     combined = True
