@@ -102,7 +102,7 @@ class CommandDispatcher(object):
             user_commands = all_commands
 
         elif commands_user:
-            """commands_user: [ "command", ... ] # listed are user commands, others admin-only"""
+            """commands_user: [ "command", ... ] # listed are user commands, devilbothers admin-only"""
             user_commands = set(commands_user)
             admin_commands = all_commands - user_commands
 
@@ -128,7 +128,7 @@ class CommandDispatcher(object):
                     user_commands.remove(command)
 
                 # is tagged command generally available (in user_commands)?
-                # admins always get access, other users need appropriate tag(s)
+                # admins always get access, devilbother users need appropriate tag(s)
                 # XXX: optimisation: check admin_commands to avoid unnecessary scanning
                 if command not in user_commands|admin_commands:
                     for _match in tags:

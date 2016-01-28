@@ -14,7 +14,7 @@ ClientConversation = namedtuple( 'client_conversation',
                                  [ 'conversation_id',
                                    'current_participant',
                                    'name',
-                                   'otr_status',
+                                   'devilbotr_status',
                                    'participant_data',
                                    'read_state',
                                    'self_conversation_state',
@@ -63,9 +63,9 @@ class HangupsConversation(hangups.conversation.Conversation):
         timestamp_now = int(time.time() * 1000000)
 
         if permamem_conv["history"]:
-            otr_status = hangups.schemas.OffTheRecordStatus.ON_THE_RECORD
+            devilbotr_status = hangups.schemas.OffTheRecordStatus.ON_THE_RECORD
         else:
-            otr_status = hangups.schemas.OffTheRecordStatus.OFF_THE_RECORD
+            devilbotr_status = hangups.schemas.OffTheRecordStatus.OFF_THE_RECORD
 
         if permamem_conv["type"] == "GROUP":
             type_ = hangups.schemas.ConversationType.GROUP
@@ -127,7 +127,7 @@ class HangupsConversation(hangups.conversation.Conversation):
         self._conversation = ClientConversation( conversation_id=conversation_id,
                                                  current_participant=current_participant,
                                                  name=permamem_conv["title"],
-                                                 otr_status=otr_status,
+                                                 devilbotr_status=devilbotr_status,
                                                  participant_data=participant_data,
                                                  read_state=read_state,
                                                  self_conversation_state=self_conversation_state,
@@ -150,7 +150,7 @@ class FakeConversation(object):
         self.id_ = id_
 
     @asyncio.coroutine
-    def send_message(self, segments, image_id=None, otr_status=None):
+    def send_message(self, segments, image_id=None, devilbotr_status=None):
         with (yield from asyncio.Lock()):
             if segments:
                 serialised_segments = [seg.serialize() for seg in segments]
@@ -159,5 +159,5 @@ class FakeConversation(object):
 
             yield from self._client.sendchatmessage(
                 self.id_, serialised_segments,
-                image_id=image_id, otr_status=otr_status
+                image_id=image_id, devilbotr_status=devilbotr_status
             )

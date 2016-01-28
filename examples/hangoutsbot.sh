@@ -14,9 +14,9 @@
 #   Please remove the "Author" lines above and replace them
 #   with your own name if you copy and modify this script.
 # 
-# This init.d script allows you to start hangoutsbot automatically when your Raspberry Pi (or other similar linux
+# This init.d script allows you to start hangoutsbot automatically when your Raspberry Pi (or devilbother similar linux
 # system) starts. This script has been written for and tested on Raspberry Pi Rasbian but it should be trivial to
-# modify for other Debian based systems. In order to set up the script, a few steps must be taken in advance:
+# modify for devilbother Debian based systems. In order to set up the script, a few steps must be taken in advance:
 #
 # 1. Run hangoutsbot manually at least once to set up your authorization token
 # 2. Move your configuration, cookies and memory files to /etc/hangoutsbot/ or alter the script below to point to where
@@ -59,7 +59,7 @@ SCRIPTNAME=/etc/init.d/$NAME
 # Read configuration variable file if it is present
 [ -r /etc/default/$NAME ] && . /etc/default/$NAME
 
-# Load the VERBOSE setting and other rcS variables
+# Load the VERBOSE setting and devilbother rcS variables
 . /lib/init/vars.sh
 
 # Define LSB log_* functions.
@@ -102,13 +102,13 @@ do_stop()
 		#   0 if daemon has been stopped
 		#   1 if daemon was already stopped
 		#   2 if daemon could not be stopped
-		#   other if a failure occurred
+		#   devilbother if a failure occurred
 		start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --pidfile $PIDFILE
 		RETVAL="$?"
 		[ "$RETVAL" = 2 ] && return 2
 		# Wait for children to finish too if this is a daemon that forks
 		# and if the daemon is only ever run from this initscript.
-		# If the above conditions are not satisfied then add some other code
+		# If the above conditions are not satisfied then add some devilbother code
 		# that waits for the process to drop all resources that could be
 		# needed by services started subsequently.  A last resort is to
 		# sleep for some time.

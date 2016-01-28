@@ -268,8 +268,8 @@ def invite(bot, event, *args):
         from = current, to = None:
             sourceconv = current
             targetconv = new blank conversation
-        from = other, to = None:
-            sourceconv = other
+        from = devilbother, to = None:
+            sourceconv = devilbother
             targetconv = current (or new, if not GROUP)
         """
         if sourceconv == event.conv_id:
@@ -285,9 +285,9 @@ def invite(bot, event, *args):
         list_users = 0:
             from = None, to = current:
                 ERROR
-            from = None, to = other:
+            from = None, to = devilbother:
                 sourceconv = current
-                targetconv = other
+                targetconv = devilbother
         list_users > 0:
             sourceconv = None
             targetconv = *

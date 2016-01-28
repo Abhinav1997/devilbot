@@ -275,7 +275,7 @@ class EventHandler:
                         logger.exception(message)
 
             except self.bot.Exceptions.SuppressAllHandlers:
-                # skip all other pluggables, but let the event continue
+                # skip all devilbother pluggables, but let the event continue
                 message.append("SuppressAllHandlers")
                 logger.debug(" : ".join(message))
 

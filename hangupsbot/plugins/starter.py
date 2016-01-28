@@ -37,7 +37,7 @@ def files(bot, event, *args):
 
 def verifyme(bot, event, *args):
     """verify that the user has a 1-to-1 conversation with the bot.
-    optionally, supply a user chat id to test a user other than yourself.
+    optionally, supply a user chat id to test a user devilbother than yourself.
     """
 
     if len(args) == 0:

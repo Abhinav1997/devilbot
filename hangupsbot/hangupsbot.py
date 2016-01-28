@@ -516,7 +516,7 @@ class HangupsBot(object):
         self._handlers = handlers.EventHandler(self)
         handlers.handler.set_bot(self) # shim for handler decorator
 
-        plugins.load(self, "monkeypatch.otr_support")
+        plugins.load(self, "monkeypatch.devilbotr_support")
 
         self._user_list = yield from hangups.user.build_user_list(self._client,
                                                                   initial_data)
@@ -712,13 +712,13 @@ class HangupsBot(object):
             except KeyError:
                 # rare scenario where a conversation was not refreshed
                 # once the initial message goes through, convmem will be updated
-                logger.warning("CORO_SEND_MESSAGE(): could not determine otr for {}".format(
+                logger.warning("CORO_SEND_MESSAGE(): could not determine devilbotr for {}".format(
                     conversation_id))
 
         if context["history"]:
-            otr_status = OffTheRecordStatus.ON_THE_RECORD
+            devilbotr_status = OffTheRecordStatus.ON_THE_RECORD
         else:
-            otr_status = OffTheRecordStatus.OFF_THE_RECORD
+            devilbotr_status = OffTheRecordStatus.OFF_THE_RECORD
 
         broadcast_list = [(conversation_id, segments)]
 
@@ -746,7 +746,7 @@ class HangupsBot(object):
             try:
                 yield from _fc.send_message( response[1],
                                              image_id=image_id,
-                                             otr_status=otr_status )
+                                             devilbotr_status=devilbotr_status )
             except hangups.NetworkError as e:
                 logger.exception("CORO_SEND_MESSAGE: error sending {}".format(response[0]))
 

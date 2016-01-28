@@ -32,7 +32,7 @@ def _watch_image_link(bot, event, command):
         probable_image_link = True
 
     elif event_text_lower.startswith(("http://", "https://")) and event_text_lower.endswith((".png", ".gif", ".gifv", ".jpg", ".jpeg")):
-        """other image links must have protocol and end with valid extension"""
+        """devilbother image links must have protocol and end with valid extension"""
         probable_image_link = True
 
     if probable_image_link and "googleusercontent" in event_text_lower:
