@@ -55,7 +55,7 @@ def _watch_for_music_link(bot, event, command):
         bot.conversation_memory_set(event.conv_id, "spotify_enabled", False)
         return
 
-    if not enabled or "/bot" in event.text:
+    if not enabled or "/devilbot" in event.text:
         return
 
     links = extract_music_links(event.text)
@@ -89,15 +89,15 @@ def _watch_for_music_link(bot, event, command):
 def spotify(bot, event, *args):
     """Commands to manage the Spotify playlist.
 
-    <b>/bot spotify</b> Returns whether Spotify is on or off.
+    <b>/devilbot spotify</b> Returns whether Spotify is on or off.
 
-    <b>/bot spotify on/off</b> Turns Spotify on or off.
+    <b>/devilbot spotify on/off</b> Turns Spotify on or off.
 
-    <b>/bot spotify playlist</b> Returns the chat's playlist URL.
+    <b>/devilbot spotify playlist</b> Returns the chat's playlist URL.
 
-    <b>/bot spotify <query></b> Directly adds a track to the playlist.
+    <b>/devilbot spotify <query></b> Directly adds a track to the playlist.
 
-    <b>/bot spotify remove <track></b> Removes the track from the playlist.
+    <b>/devilbot spotify remove <track></b> Removes the track from the playlist.
     """
     # Start with Spotify off.
     enabled = bot.conversation_memory_get(event.conv_id, "spotify_enabled")
@@ -120,9 +120,9 @@ def spotify(bot, event, *args):
                 event.conv_id, "spotify_enabled", enabled)
         elif not enabled:
             result = _(("<em>Spotify is <b>off</b>. To turn it on, "
-                        "use <b>/bot spotify on</b></em>"))
+                        "use <b>/devilbot spotify on</b></em>"))
         elif command == "help" and len(args) == 1:
-            result = _("<em>Did you mean <b>/bot help spotify</b>?</em>")
+            result = _("<em>Did you mean <b>/devilbot help spotify</b>?</em>")
         elif command == "playlist" and len(args) == 1:
             playlist = chat_playlist(bot, event)
             result = _("<em>Spotify playlist: {}</em>".format(playlist.url))

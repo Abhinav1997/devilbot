@@ -76,7 +76,7 @@ def prepare(bot, event, *args):
     draw_lists[global_draw_name] = {"box": [], "users": {}}
 
     """special types
-        /bot prepare [thing] COMPASS - 4 cardinal + 4 ordinal
+        /devilbot prepare [thing] COMPASS - 4 cardinal + 4 ordinal
 
         XXX: add more useful shortcuts here!
     """
@@ -137,7 +137,7 @@ def perform_drawing(bot, event, *args):
         /me draw[s] [a[n]] sticks[s] => draws from "stick", "sticks" or "stickses"
         /me draws[s]<unrecognised> => draws from "default"
 
-        note: to prepare lotteries/drawings, see /bot prepare ...
+        note: to prepare lotteries/drawings, see /devilbot prepare ...
 
         XXX: check is for singular, plural "-s" and plural "-es"
     """

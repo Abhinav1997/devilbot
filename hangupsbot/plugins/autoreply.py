@@ -118,9 +118,9 @@ def _words_in_text(word, text):
 def autoreply(bot, event, cmd=None, *args):
     """adds or removes an autoreply.
     Format:
-    /bot autoreply add [["question1","question2"],"answer"] // add an autoreply
-    /bot autoreply remove [["question"],"answer"] // remove an autoreply
-    /bot autoreply // view all autoreplies
+    /devilbot autoreply add [["question1","question2"],"answer"] // add an autoreply
+    /devilbot autoreply remove [["question"],"answer"] // remove an autoreply
+    /devilbot autoreply // view all autoreplies
     """
 
     path = ["autoreplies"]

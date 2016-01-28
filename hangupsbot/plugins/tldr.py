@@ -9,10 +9,10 @@ def _initialise(bot):
 
 def tldr(bot, event, *args):
     """Adds a short message to a list saved for the conversation using:
-    /bot tldr <message>
-    All TLDRs can be retrieved by /bot tldr, single tldr with /bot tldr <number>
-    All TLDRs can be deleted using /bot tldr clear, single tldr with /bot tldr clear <number>
-    Single TLDRs can be edited using /bot tldr edit <number> <new_message>"""
+    /devilbot tldr <message>
+    All TLDRs can be retrieved by /devilbot tldr, single tldr with /devilbot tldr <number>
+    All TLDRs can be deleted using /devilbot tldr clear, single tldr with /devilbot tldr clear <number>
+    Single TLDRs can be edited using /devilbot tldr edit <number> <new_message>"""
     parameters = list(args)
 
     if not bot.memory.exists(['tldr']):

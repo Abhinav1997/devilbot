@@ -69,7 +69,7 @@ This will be accomplished using the supplied **starter** plugin with
 3. On a browser, login into the bot's gmail account and ensure chat 
    is activated. Accept the invite from your actual account.
 4. Back on your hangouts client, send the following message:
-   `/bot iamspartacus`
+   `/devilbot iamspartacus`
 5. The bot should reply with "configuring first admin" or a similar
    message.
 
@@ -94,5 +94,5 @@ For further information, please see the README file and wiki.
   `/<username>/.local/share/hangupsbot/hangupsbot.log` - 
   note: this file is more useful for developers and may be quite verbose
 * You can verify the location of your active `config.json` by sending
-  the following command to the bot via hangouts: `/bot files` (with
+  the following command to the bot via hangouts: `/devilbot files` (with
   the **starter** plugin active)

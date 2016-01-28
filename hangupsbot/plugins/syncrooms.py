@@ -162,7 +162,7 @@ def _handle_incoming_message(bot, event, command):
                     _context = {}
                     _context["explicit_relay"] = True
 
-                    if not event.text.startswith(("/bot ", "/me ")):
+                    if not event.text.startswith(("/devilbot ", "/me ")):
                         _context["autotranslate"] = {
                             "conv_id" : event.conv_id,
                             "event_text" : event.text }
@@ -261,12 +261,12 @@ def syncusers(bot, event, conversation_id=None, *args):
     if not conversation_id:
         conversation_id = event.conv_id
     elif conversation_id == "rooms":
-        # user specified /bot syncusers rooms
+        # user specified /devilbot syncusers rooms
         conversation_id = event.conv_id
         combined = False
 
     if "rooms" in args:
-        # user specified /bot syncusers [roomid] rooms
+        # user specified /devilbot syncusers [roomid] rooms
         combined = False
 
     syncouts = bot.get_config_option('sync_rooms')

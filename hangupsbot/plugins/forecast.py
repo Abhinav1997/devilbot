@@ -25,9 +25,9 @@ def _initialize(bot):
 
 def forecast(bot, event, *args):
     """Returns weather information from Forecast.io.
-<b>/bot forecast <location></b> Get location's current weather.
-<b>/bot forecast</b> Get current weather of last used location.
-<b>/bot forecast unit <F|C></b> Set unit to display degrees."""
+<b>/devilbot forecast <location></b> Get location's current weather.
+<b>/devilbot forecast</b> Get current weather of last used location.
+<b>/devilbot forecast unit <F|C></b> Set unit to display degrees."""
 
     if not bot.memory.exists(['forecast']):
         bot.memory.set_by_path(['forecast'], {})
@@ -72,7 +72,7 @@ def forecast(bot, event, *args):
         if not coords:
             yield from bot.coro_send_message(
                 event.conv_id,
-                _('<em>Your location history not found. Use /bot weather <b>address</b>.</em>'))
+                _('<em>Your location history not found. Use /devilbot weather <b>address</b>.</em>'))
             return
     yield from bot.coro_send_message(event.conv_id, lookup_weather(coords))
 
