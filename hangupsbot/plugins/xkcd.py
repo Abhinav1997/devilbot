@@ -1,17 +1,19 @@
-import hangups
-import plugins
 import re, io, os
 import html, aiohttp
 import urllib.request, urllib.parse
 from bs4 import BeautifulSoup
 
+import plugins
+
 def _initialise(bot):
   plugins.register_user_command(["xkcd"])
     
 def xkcd(bot, event, *args):
-  image_link = "//imgs.xkcd.com/comics/xkcd_stack.png"
-  htm = urllib.request.urlopen("http://c.xkcd.com/random/comic/").read()
   soup = BeautifulSoup(htm, "html5lib")
+  if ' '.join(args).strip().lower == "latest":
+    htm = "http://xkcd.com" + soup.findAll('a')[10].get('href')
+  else:
+    htm = urllib.request.urlopen("http://c.xkcd.com/random/comic/").read()
   image_link = soup.findAll('img')[1].get('src')
   image_link = "http:" + image_link
   filename = os.path.basename(image_link)
