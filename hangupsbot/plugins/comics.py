@@ -31,11 +31,11 @@ def cnh(bot, event, *args):
   else:
     htm = urllib.request.urlopen("http://explosm.net/comics/random/").read()
   soup = BeautifulSoup(htm, "html5lib")
-  image_link = soup.findAll('img')[16].get('src')
+  image_link = soup.find(id='main-comic').get('src')
   image_link = "http:" + image_link
   filename = os.path.basename(image_link)
   r = yield from aiohttp.request('get', image_link)
   raw = yield from r.read()
   image_data = io.BytesIO(raw)
   image_id = yield from bot._client.upload_image(image_data, filename=filename)
-  yield from bot.coro_send_message(event.conv.id_, None, image_id=image_id
+  yield from bot.coro_send_message(event.conv.id_, None, image_id=image_id)
