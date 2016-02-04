@@ -1,3 +1,13 @@
+"""
+instructions:
+* get CSE Search ID from https://cse.google.co.in/cse/
+* put CSE Search ID in config.json:cse
+* more info on https://developers.google.com/custom-search/
+*
+* get google API key from https://console.developers.google.com/apis/
+* put google API key in config.json:google-api
+"""
+
 import re, os, io
 import html, aiohttp
 import json
