@@ -9,11 +9,13 @@ def _initialise(bot):
   plugins.register_user_command(["xkcd"])
     
 def xkcd(bot, event, *args):
-  soup = BeautifulSoup(htm, "html5lib")
-  if ' '.join(args).strip().lower == "latest":
-    htm = "http://xkcd.com" + soup.findAll('a')[10].get('href')
+  init_htm = urllib.request.urlopen("http://xkcd.com/archive/").read()
+  init_soup = BeautifulSoup(init_htm, "html5lib")
+  if ' '.join(args).strip().lower() == "latest":
+    htm = urllib.request.urlopen("http://xkcd.com" + init_soup.findAll('a')[10].get('href')).read()
   else:
     htm = urllib.request.urlopen("http://c.xkcd.com/random/comic/").read()
+  soup = BeautifulSoup(htm, "html5lib")
   image_link = soup.findAll('img')[1].get('src')
   image_link = "http:" + image_link
   filename = os.path.basename(image_link)
