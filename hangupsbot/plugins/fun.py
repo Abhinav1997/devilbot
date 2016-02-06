@@ -15,7 +15,7 @@ def compliment(bot, event, *args):
   i = randint(0,101)
   compliment = soup.findAll('p')[i].getText()
   if name:
-    compliment = name + ', ' + compliment
+    compliment = name + ', ' + compliment.lower()
   yield from bot.coro_send_message(
       event.conv,
       _(compliment))
@@ -29,7 +29,7 @@ def insult(bot, event, *args):
   insult = soup.findAll(attrs={'bordercolor' : '#FFFFFF'})[0].getText()
   insult = os.linesep.join([s for s in insult.splitlines() if s])
   if name:
-    insult = name + ', ' + insult
+    insult = name + ', ' + insult.lower()
   yield from bot.coro_send_message(
       event.conv,
       _(insult))
