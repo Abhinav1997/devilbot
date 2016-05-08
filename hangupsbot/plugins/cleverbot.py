@@ -1,4 +1,4 @@
-import asyncio, hashlib, html, logging, urllib
+import asyncio, collections, hashlib, html, logging, urllib
 
 import urllib.request as urllib2
 from http.cookiejar import CookieJar
@@ -42,31 +42,37 @@ class Cleverbot:
 
     def __init__(self):
         """ The data that will get passed to Cleverbot's web API """
-        self.data = {
-            'stimulus': '',
-            'start': 'y',  # Never modified
-            'sessionid': '',
-            'vText8': '',
-            'vText7': '',
-            'vText6': '',
-            'vText5': '',
-            'vText4': '',
-            'vText3': '',
-            'vText2': '',
-            'icognoid': 'wsf',  # Never modified
-            'icognocheck': '',
-            'fno': 0,  # Never modified
-            'prevref': '',
-            'emotionaloutput': '',  # Never modified
-            'emotionalhistory': '',  # Never modified
-            'asbotname': '',  # Never modified
-            'ttsvoice': '',  # Never modified
-            'typing': '',  # Never modified
-            'lineref': '',
-            'sub': 'Say',  # Never modified
-            'islearning': 1,  # Never modified
-            'cleanslate': False,  # Never modified
-        }
+        self.data = collections.OrderedDict(
+            (
+                # must be the first pairs
+                ('stimulus', ''),
+                ('cb_settings_language', ''),
+                ('cb_settings_scripting', 'no'),
+                ('islearning', 1),  # Never modified
+                ('icognoid', 'wsf'),  # Never modified
+                ('icognocheck', ''),
+
+                ('start', 'y'),  # Never modified
+                ('sessionid', ''),
+                ('vText8', ''),
+                ('vText7', ''),
+                ('vText6', ''),
+                ('vText5', ''),
+                ('vText4', ''),
+                ('vText3', ''),
+                ('vText2', ''),
+                ('fno', 0),  # Never modified
+                ('prevref', ''),
+                ('emotionaloutput', ''),  # Never modified
+                ('emotionalhistory', ''),  # Never modified
+                ('asbotname', ''),  # Never modified
+                ('ttsvoice', ''),  # Never modified
+                ('typing', ''),  # Never modified
+                ('lineref', ''),
+                ('sub', 'Say'),  # Never modified
+                ('cleanslate', False),  # Never modified
+            )
+        )
 
         # the log of our conversation with Cleverbot
         self.conversation = []
@@ -222,7 +228,6 @@ class Cleverbot:
         parsed_dict = {
             'answer': parsed[0][0],
             'conversation_id': parsed[0][1],
-            'conversation_log_id': parsed[0][2],
         }
         try:
             parsed_dict['unknown'] = parsed[1][-1]
