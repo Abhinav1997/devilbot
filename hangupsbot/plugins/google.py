@@ -16,80 +16,44 @@ import urllib.request
 import plugins
 
 def _initialise(bot):
-  plugins.register_user_command(["search", "news"])
   gapi = bot.get_config_option("google-api")
   if gapi:
-    plugins.register_user_command(["image", "youtube"])
+    plugins.register_user_command(["image", "search", "youtube"])
 
 def search(bot, event, *args):
+  error = 0
   squery = ' '.join(args).strip()
   squery = squery.replace(" ", "+")
   query = re.sub(r'^\.g', u'', squery, re.UNICODE).encode('utf-8')
   query = query.strip()
   query = urllib.request.quote(query)
-  url = u'http://ajax.googleapis.com/ajax/services/search/web?v=2.0&q=' + query
-  search_response = urllib.request.urlopen(url)
-  search_results = search_response.read().decode("utf8")
-  results = json.loads(search_results)
-  data = results['responseData']
-  hits = data['results']
-  num = 0
-  for h in hits:
-    while num == 0:
-      title = h['title']
-      url = h['url']
-      num = 1
-  url = urllib.request.unquote(url)
-
+  cse = bot.get_config_option("cse")
+  cse = cse.replace(":","%3A")
+  api = bot.get_config_option("google-api")
+  url = u'https://www.googleapis.com/customsearch/v1?q=' + query + u'&cx=' + cse + u'&key=' + api
   try:
-    title
-  except UnboundLocalError:
-    yield from bot.coro_send_message(
-        event.conv,
-        _("No results found."))
-  else:
-    title = html.unescape(title)
+    search_response = urllib.request.urlopen(url)
+  except:
+    error = 1
+  if error is 0:
+    search_results = search_response.read().decode("utf8")
+    results = json.loads(search_results)
+    title = results['items'][0]['htmlTitle']
+    link = results['items'][0]['link']
+    desc = results['items'][0]['htmlSnippet']
     yield from bot.coro_send_message(
         event.conv,
         _(title))
     yield from bot.coro_send_message(
         event.conv,
-        _(url))
-
-def news(bot, event, *args):
-  squery = ' '.join(args).strip()
-  squery = squery.replace(" ", "+")
-  query = re.sub(r'^\.g', u'', squery, re.UNICODE).encode('utf-8')
-  query = query.strip()
-  query = urllib.request.quote(query)
-  url = u'http://ajax.googleapis.com/ajax/services/search/news?v=2.0&q=' + query
-  search_response = urllib.request.urlopen(url)
-  search_results = search_response.read().decode("utf8")
-  results = json.loads(search_results)
-  data = results['responseData']
-  hits = data['results']
-  num = 0
-  for h in hits:
-    while num == 0:
-      title = h['title']
-      url = h['url']
-      num = 1
-  url = urllib.request.unquote(url)
-
-  try:
-    title
-  except UnboundLocalError:
+        _(desc))
     yield from bot.coro_send_message(
         event.conv,
-        _("No results found."))
+        _(link))
   else:
-    title = html.unescape(title)
     yield from bot.coro_send_message(
         event.conv,
-        _(title))
-    yield from bot.coro_send_message(
-        event.conv,
-        _(url))
+        _("Ran out of today's quota. Try again later."))
 
 def image(bot, event, *args):
   error = 0
