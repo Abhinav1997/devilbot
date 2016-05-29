@@ -95,7 +95,7 @@ def mention(bot, event, *args):
                     break
 
     """
-    /bot mention <fragment> test
+    /devilbot mention <fragment> test
     """
     noisy_mention_test = False
     if len(args) == 2 and args[1] == "test":
@@ -278,7 +278,7 @@ def mention(bot, event, *args):
                         text_html += ' (' + bot.memory.get_by_path(['user_data', u.id_.chat_id, "nickname"]) + ')'
                     text_html += '<br />'
 
-                text_html += "<br /><em>To toggle this message on/off, use <b>/bot bemorespecific</b></em>"
+                text_html += "<br /><em>To toggle this message on/off, use <b>/devilbot bemorespecific</b></em>"
 
                 yield from bot.coro_send_message(conv_1on1_initiator, text_html)
 
@@ -368,9 +368,9 @@ def mention(bot, event, *args):
 
 def pushbulletapi(bot, event, *args):
     """allow users to configure pushbullet integration with api key
-        /bot pushbulletapi [<api key>|false, 0, -1]"""
+        /devilbot pushbulletapi [<api key>|false, 0, -1]"""
 
-    # XXX: /bot config exposes all configured api keys (security risk!)
+    # XXX: /devilbot config exposes all configured api keys (security risk!)
 
     if len(args) == 1:
         value = args[0]
@@ -415,7 +415,7 @@ def bemorespecific(bot, event, *args):
 
 def setnickname(bot, event, *args):
     """allow users to set a nickname for sync relay
-        /bot setnickname <nickname>"""
+        /devilbot setnickname <nickname>"""
 
     truncatelength = 16 # What should the maximum length of the nickname be?
     minlength = 2 # What should the minimum length of the nickname be?

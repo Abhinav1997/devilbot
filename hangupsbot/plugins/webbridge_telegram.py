@@ -42,7 +42,7 @@ class BridgeInstance(WebFramework):
 
         BOT_API_KEY = self.configuration[0]["bot_api_key"]
 
-        url = "https://api.telegram.org/bot{}/{}".format(BOT_API_KEY, method)
+        url = "https://api.telegram.org/devilbot{}/{}".format(BOT_API_KEY, method)
 
         logger.debug(url)
         r = yield from aiohttp.request('post', url, data=data, headers=headers, connector=connector)
@@ -60,7 +60,7 @@ class BridgeInstance(WebFramework):
         BOT_API_KEY = self.configuration[0]["bot_api_key"]
 
         CONNECT_TIMEOUT = 90
-        url = "https://api.telegram.org/bot{}/getUpdates".format(BOT_API_KEY)
+        url = "https://api.telegram.org/devilbot{}/getUpdates".format(BOT_API_KEY)
 
         logger.info('Opening new long-polling request')
 

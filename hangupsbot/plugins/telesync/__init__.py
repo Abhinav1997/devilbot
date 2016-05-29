@@ -504,8 +504,8 @@ def _initialise(bot):
 @command.register(admin=True)
 def telesync(bot, event, *args):
     """
-    /bot telesync <telegram chat id> - set sync with telegram group
-    /bot telesync - disable sync and clear sync data from memory
+    /devilbot telesync <telegram chat id> - set sync with telegram group
+    /devilbot telesync - disable sync and clear sync data from memory
     """
     parameters = list(args)
 
@@ -568,7 +568,7 @@ def is_animated_photo(file_name):
 def _on_hangouts_message(bot, event, command=""):
     global tg_bot
 
-    if event.text.startswith('/'):  # don't sync /bot commands
+    if event.text.startswith('/'):  # don't sync /devilbot commands
         return
 
     has_photo = False

@@ -31,7 +31,7 @@ def getplugins(bot, event, *args):
 
 def addplugin(bot, event, plugin, *args):
     """Adds a plugin to the bot, REQUIRES REBOOT
-    /bot addplugin <pluginname>"""
+    /devilbot addplugin <pluginname>"""
     all_plugins = plugins.retrieve_all_plugins()
     loaded_plugins = plugins.get_configured_plugins(bot)
 
@@ -44,7 +44,7 @@ def addplugin(bot, event, plugin, *args):
                 bot.config.save()
                 yield from bot.coro_send_message(event.conv_id, "Plugin <i>{}</i> added".format(plugin))
             else:
-                yield from bot.coro_send_message(event.conv_id, "Error: Do <b>/bot config set plugins []</b> first")
+                yield from bot.coro_send_message(event.conv_id, "Error: Do <b>/devilbot config set plugins []</b> first")
         else:
             yield from bot.coro_send_message(event.conv_id, "Not a valid plugin name")
     else:
@@ -52,7 +52,7 @@ def addplugin(bot, event, plugin, *args):
 
 def removeplugin(bot, event, plugin, *args):
     """Removes a plugin from the bot, REQUIRES REBOOT
-    /bot removeplugin <pluginname>"""
+    /devilbot removeplugin <pluginname>"""
     value = bot.config.get_by_path(["plugins"])
     if isinstance(value, list):
         try:

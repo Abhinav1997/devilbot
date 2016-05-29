@@ -111,7 +111,7 @@ def subscribe(bot, event, *args):
 
     if not keyword:
         yield from bot.coro_send_message(
-            event.conv,_("Usage: /bot subscribe [keyword]"))
+            event.conv,_("Usage: /devilbot subscribe [keyword]"))
         if _internal.keywords[event.user.id_.chat_id]:
             yield from bot.coro_send_message(
                 event.conv,

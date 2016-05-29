@@ -35,7 +35,7 @@ setuid botty
 
 # exec the process. Use fully formed path names so that there is no reliance on $PATH
 # the 'www' file is a node.js script which starts the foobar application.
-exec /usr/bin/python3 /volume1/homes/botty/hangoutsbot/hangupsbot/hangupsbot.py
+exec /usr/bin/python3 /volume1/homes/devilbotty/hangoutsbot/hangupsbot/hangupsbot.py
 
 """
 

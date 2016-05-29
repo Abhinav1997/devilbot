@@ -24,7 +24,7 @@ def _initialize(bot):
 
 def setweatherlocation(bot, event, *args):
     """Sets the Lat Long default coordinates for this hangout when polling for weather data
-    /bot setWeatherLocation <location>
+    /devilbot setWeatherLocation <location>
     """
     location = ''.join(args).strip()
     if not location:
@@ -45,8 +45,8 @@ def setweatherlocation(bot, event, *args):
 
 def weather(bot, event, *args):
     """Returns weather information from Forecast.io
-    <b>/bot weather <location></b> Get location's current weather.
-    <b>/bot weather</b> Get the hangouts default location's current weather. If the default location is not set talk to a hangout admin.
+    <b>/devilbot weather <location></b> Get location's current weather.
+    <b>/devilbot weather</b> Get the hangouts default location's current weather. If the default location is not set talk to a hangout admin.
     """
     weather = _get_weather(bot, event, args)
     if weather:
@@ -56,8 +56,8 @@ def weather(bot, event, *args):
 
 def forecast(bot, event, *args):
     """Returns a brief textual forecast from Forecast.io
-    <b>/bot weather <location></b> Get location's current forecast.
-    <b>/bot weather</b> Get the hangouts default location's forecast. If default location is not set talk to a hangout admin.
+    <b>/devilbot weather <location></b> Get location's current forecast.
+    <b>/devilbot weather</b> Get the hangouts default location's forecast. If default location is not set talk to a hangout admin.
     """
     weather = _get_weather(bot, event, args)
     if weather:

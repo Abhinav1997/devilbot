@@ -42,7 +42,7 @@ def _migrate_dnd_config_to_memory(bot):
 
 def dnd(bot, event, *args):
     """allow users to toggle DND for ALL conversations (i.e. no @mentions)
-        /bot dnd"""
+        /devilbot dnd"""
 
     # ensure dndlist is initialised
     if not bot.memory.exists(["donotdisturb"]):
