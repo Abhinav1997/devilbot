@@ -260,10 +260,10 @@ def chat(bot, event, *args):
     if args:
         text = yield from cleverbot_ask(event.conv_id, ' '.join(args))
         if not text:
-            text = _("<em>Cleverbot is silent</em>")
+            text = _("Something has gone wrong - please try again later.")
 
     else:
-        text = _("<em>you have to say something to Cleverbot</em>")
+        text = _("You need to actually say something (e.g. <em>/devilbot chat hello</em>). ;)")
 
     yield from bot.coro_send_message(event.conv_id, text)
 
